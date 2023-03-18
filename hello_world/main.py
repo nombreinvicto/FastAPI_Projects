@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from hello_world.routers import blog_get
 from hello_world.routers import blog_post
+from hello_world.db import models
+from hello_world.db.database import engine
 
 # %% ##################################################################
 # server python_file:fastapi_object --reload
@@ -16,3 +18,6 @@ app.include_router(blog_post.router)
 @app.get("/")
 def index():
     return {"message": 'Hello World'}
+
+
+models.Base.metadata.create_all(engine)
